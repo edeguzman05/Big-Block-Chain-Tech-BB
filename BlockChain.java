@@ -40,13 +40,18 @@ public class BlockChain {
     * Assume genesis block is a valid block
     */
    public BlockChain(Block genesisBlock) {
-      // IMPLEMENT THIS
+      // Create both the unspent Tx Pool and the Tx Pool
+      utxo = new UTXOPool();
+      transactionPool = new TransactionPool();
+      
+      BlockNode genesis = (genesisBlock, null, utxo);
+      maxHeight = genesis;
    }
 
    /* Get the maximum height block
     */
    public Block getMaxHeightBlock() {
-      // IMPLEMENT THIS
+      return getMaxHeightBlock().b;
    }
    
    /* Get the UTXOPool for mining a new block on top of 
@@ -59,7 +64,7 @@ public class BlockChain {
    /* Get the transaction pool to mine a new block
     */
    public TransactionPool getTransactionPool() {
-      // IMPLEMENT THIS
+      return transactionPool;
    }
 
    /* Add a block to block chain if it is valid.
@@ -77,6 +82,6 @@ public class BlockChain {
    /* Add a transaction in transaction pool
     */
    public void addTransaction(Transaction tx) {
-      // IMPLEMENT THIS
+      txPool.addTransaction(tx);
    }
 }
