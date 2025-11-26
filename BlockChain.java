@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /* Block Chain should maintain only limited block nodes to satisfy the functions
-   You should not have the all the blocks added to the block chain in memory 
+   You should not have the all the blocks added to the blockchain in memory
    as it would overflow memory
  */
 
 public class BlockChain {
    public static final int CUT_OFF_AGE = 10;
 
-   // all information required in handling a block in block chain
+   // all information required in handling a block in blockchain
    private class BlockNode {
       public Block b;
       public BlockNode parent;
@@ -36,22 +36,22 @@ public class BlockChain {
       }
    }
 
-   /* create an empty block chain with just a genesis block.
+   /* create an empty blockchain with just a genesis block.
     * Assume genesis block is a valid block
     */
    public BlockChain(Block genesisBlock) {
       // Create both the unspent Tx Pool and the Tx Pool
-      utxo = new UTXOPool();
-      transactionPool = new TransactionPool();
-      
-      BlockNode genesis = (genesisBlock, null, utxo);
-      maxHeight = genesis;
+      UTXOPool utxo = new UTXOPool();
+      TransactionPool transactionPool = new TransactionPool();
+      BlockNode genesis = new BlockNode(genesisBlock, null, utxo);
+      // maxHeight = genesis
    }
 
    /* Get the maximum height block
     */
    public Block getMaxHeightBlock() {
-      return getMaxHeightBlock().b;
+      // IMPLEMENT THIS
+      return null;
    }
    
    /* Get the UTXOPool for mining a new block on top of 
@@ -59,15 +59,17 @@ public class BlockChain {
     */
    public UTXOPool getMaxHeightUTXOPool() {
       // IMPLEMENT THIS
+      return null;
    }
    
    /* Get the transaction pool to mine a new block
     */
    public TransactionPool getTransactionPool() {
-      return transactionPool;
+      // IMPLEMENT THIS
+      return null;
    }
 
-   /* Add a block to block chain if it is valid.
+   /* Add a block to blockchain if it is valid.
     * For validity, all transactions should be valid
     * and block should be at height > (maxHeight - CUT_OFF_AGE).
     * For example, you can try creating a new block over genesis block 
@@ -77,11 +79,14 @@ public class BlockChain {
     */
    public boolean addBlock(Block b) {
        // IMPLEMENT THIS
+      byte[] prev = b.getPrevBlockHash();
+      return prev != null;
    }
 
    /* Add a transaction in transaction pool
     */
    public void addTransaction(Transaction tx) {
-      txPool.addTransaction(tx);
+      // IMPLEMENT THIS
+      getTransactionPool().addTransaction(tx);
    }
 }
